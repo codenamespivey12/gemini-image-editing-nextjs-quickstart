@@ -20,17 +20,16 @@ export default function Home() {
   const [selectedModel, setSelectedModel] = useState<ModelType>("fast");
 
   const handleImageSelect = (imageData: string) => {
-    // Set the image data
-    setImage(imageData || null);
-
-    // If we have valid image data, create a placeholder generated image
-    // This will trigger the UI to show the edit screen
-    if (imageData) {
-      // Set a temporary description to indicate the image was uploaded
+    if (imageData && imageData.startsWith("data:image")) {
+      // This is a successful image upload/selection
+      setImage(imageData); // Set the base/original uploaded image
+      setGeneratedImage(imageData); // Set the current image for editing/display
       setDescription("Your uploaded image is ready to edit. Enter a prompt to describe the changes you want to make.");
-
-      // Set the uploaded image as the "generated" image to display in the edit view
-      setGeneratedImage(imageData);
+    } else {
+      // This handles removal (imageData === "") or invalid data
+      setImage(null);
+      setGeneratedImage(null);
+      setDescription(null);
     }
   };
 
