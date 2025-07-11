@@ -78,6 +78,15 @@ export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploa
 
         // Convert to base64 with compression
         const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+
+        console.log("Image compression results:", {
+          originalSize: file.size,
+          originalDimensions: `${img.width}x${img.height}`,
+          newDimensions: `${width}x${height}`,
+          compressedSize: compressedDataUrl.length,
+          compressionRatio: (compressedDataUrl.length / file.size * 100).toFixed(1) + "%"
+        });
+
         onImageSelect(compressedDataUrl);
         setIsLoading(false);
       };

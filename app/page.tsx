@@ -49,8 +49,26 @@ export default function Home() {
     // Set the uploaded image as the "generated" image to display in the edit view
     setGeneratedImage(imageData);
 
-    // Clear any existing history since this is a fresh upload
-    setHistory([]);
+    // Create initial history entry to establish the uploaded image in conversation context
+    // This mimics what happens when an image is generated from text
+    const initialUserMessage: HistoryItem = {
+      role: "user",
+      parts: [
+        { text: "I have uploaded an image that I would like to edit." },
+        { image: imageData }
+      ],
+    };
+
+    const initialAiResponse: HistoryItem = {
+      role: "model",
+      parts: [
+        { text: "I can see your uploaded image. Please describe what changes you'd like me to make." },
+        { image: imageData }
+      ],
+    };
+
+    // Set the initial history to establish context
+    setHistory([initialUserMessage, initialAiResponse]);
   };
 
   const handlePromptSubmit = async (prompt: string) => {
