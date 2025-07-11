@@ -1,17 +1,27 @@
-# Gemini 2.0 Flash Image Generation and Editing
+# AI Image Generation and Editing with Model Selection
 
-Nextjs quickstart for to generating and editing images with Google Gemini 2.0 Flash. It allows users to generate images from text prompts or edit existing images through natural language instructions, maintaining conversation context for iterative refinements. Try out the hosted demo at [Hugging Face Spaces](https://huggingface.co/spaces/philschmid/image-generation-editing).
+Next.js quickstart for generating and editing images with multiple AI models. Choose between **Fast** (Google Gemini 2.0 Flash) for quick generation or **HQ** (OpenAI GPT-Image-1) for high-quality results. The app allows users to generate images from text prompts or edit existing images through natural language instructions, maintaining conversation context for iterative refinements.
 
 https://github.com/user-attachments/assets/8ffa5ee3-1b06-46a9-8b5e-761edb0e00c3
 
-Get your `GEMINI_API_KEY` key [here](https://ai.google.dev/gemini-api/docs/api-key) and start building.
+## API Keys Required
+
+- Get your `GEMINI_API_KEY` [here](https://ai.google.dev/gemini-api/docs/api-key)
+- Get your `OPENAI_API_KEY` [here](https://platform.openai.com/api-keys)
+
+Both API keys are required for the app to function properly.
 
 **How It Works:**
 
-1. **Create Images**: Generate images from text prompts using Gemini 2.0 Flash
-2. **Edit Images**: Upload an image and provide instructions to modify it
-3. **Conversation History**: Maintain context through a conversation with the AI for iterative refinements
-4. **Download Results**: Save your generated or edited images
+1. **Model Selection**: Choose between Fast (Gemini 2.0 Flash) or HQ (OpenAI GPT-Image-1) models
+2. **Create Images**: Generate images from text prompts using your selected AI model
+3. **Edit Images**: Upload an image and provide instructions to modify it
+4. **Conversation History**: Maintain context through a conversation with the AI for iterative refinements
+5. **Download Results**: Save your generated or edited images
+
+**Model Comparison:**
+- **Fast (Gemini 2.0 Flash)**: Quick generation, good for rapid prototyping and iterations
+- **HQ (OpenAI GPT-Image-1)**: High-quality results with superior instruction following and detail
 
 ## Basic request
 

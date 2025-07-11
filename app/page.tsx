@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ImageUpload } from "@/components/ImageUpload";
 import { ImagePromptInput } from "@/components/ImagePromptInput";
 import { ImageResultDisplay } from "@/components/ImageResultDisplay";
+import { ModelSelector, ModelType } from "@/components/ModelSelector";
 import { ImageIcon, Wand2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { HistoryItem } from "@/lib/types";
@@ -14,6 +15,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [selectedModel, setSelectedModel] = useState<ModelType>("fast");
 
   const handleImageSelect = (imageData: string) => {
     setImage(imageData || null);
@@ -32,6 +34,7 @@ export default function Home() {
         prompt,
         image: imageToEdit,
         history: history.length > 0 ? history : undefined,
+        model: selectedModel,
       };
 
       const response = await fetch("/api/image", {
@@ -125,6 +128,10 @@ export default function Home() {
               <ImageUpload
                 onImageSelect={handleImageSelect}
                 currentImage={currentImage}
+              />
+              <ModelSelector
+                selectedModel={selectedModel}
+                onModelChange={setSelectedModel}
               />
               <ImagePromptInput
                 onSubmit={handlePromptSubmit}

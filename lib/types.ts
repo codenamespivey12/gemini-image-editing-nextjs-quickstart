@@ -15,6 +15,9 @@ export interface HistoryPart {
   image?: string;
 }
 
+// Model selection type
+export type ModelType = "fast" | "hq";
+
 // Note: When sending to the sixtyoneeighty API:
 // 1. User messages can contain both text and images (as inlineData)
 // 2. Model messages should only contain text parts

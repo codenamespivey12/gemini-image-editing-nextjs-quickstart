@@ -2,6 +2,7 @@
 
 import { useCallback, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
+import Image from "next/image";
 import { Button } from "./ui/button";
 import { Upload as UploadIcon, Image as ImageIcon, X } from "lucide-react";
 
@@ -55,13 +56,13 @@ export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploa
         }
         setIsLoading(false);
       };
-      reader.onerror = (error) => {
+      reader.onerror = () => {
         onError?.("Error reading file. Please try again.");
         setIsLoading(false);
       };
       reader.readAsDataURL(file);
     },
-    [onImageSelect]
+    [onImageSelect, onError]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -130,10 +131,13 @@ export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploa
             </Button>
           </div>
           <div className="w-full overflow-hidden rounded-md">
-            <img
+            <Image
               src={currentImage}
               alt="Selected"
+              width={640}
+              height={480}
               className="w-full h-auto object-contain"
+              unoptimized
             />
           </div>
         </div>
