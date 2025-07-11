@@ -22,9 +22,9 @@ export async function POST(req: NextRequest) {
   try {
     // Make sure we have an API key configured
     if (!GEMINI_API_KEY) {
-      console.error("GEMINI_API_KEY is not configured");
+      console.error("sixtyoneeighty_API_KEY is not configured");
       return NextResponse.json(
-        { success: false, error: "GEMINI_API_KEY is not configured" },
+        { success: false, error: "sixtyoneeighty_API_KEY is not configured" },
         { status: 500 }
       );
     }
@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-      // Convert history to the format expected by Gemini API
+      // Convert history to the format expected by sixtyoneeighty API
       const formattedHistory =
         history && history.length > 0
           ? history
@@ -173,7 +173,7 @@ export async function POST(req: NextRequest) {
       console.error("Error in chat.sendMessage:", error);
       const errorMessage = error instanceof Error ? error.message : "Unknown error in AI processing";
       return NextResponse.json(
-        { success: false, error: "Gemini API error", details: errorMessage },
+        { success: false, error: "sixtyoneeighty API error", details: errorMessage },
         { status: 500 }
       );
     }
@@ -208,7 +208,7 @@ export async function POST(req: NextRequest) {
         }
       }
     } else {
-      console.error("No response from Gemini API", { result });
+      console.error("No response from sixtyoneeighty API", { result });
       return NextResponse.json(
         { success: false, error: "No response from Gemini API" },
         { status: 500 }
@@ -216,7 +216,7 @@ export async function POST(req: NextRequest) {
     }
 
     if (!imageData) {
-      console.error("No image data in Gemini response", { response });
+      console.error("No image data in sixtyoneeighty response", { response });
       return NextResponse.json(
         { success: false, error: "No image data in Gemini response" },
         { status: 500 }

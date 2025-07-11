@@ -15,7 +15,7 @@ export interface HistoryPart {
   image?: string;
 }
 
-// Note: When sending to the Gemini API:
+// Note: When sending to the sixtyoneeighty API:
 // 1. User messages can contain both text and images (as inlineData)
 // 2. Model messages should only contain text parts
 // 3. Images in history are stored as data URLs in our app, but converted to base64 for the API

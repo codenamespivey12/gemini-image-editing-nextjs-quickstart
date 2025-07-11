@@ -82,7 +82,7 @@ export function ImageResultDisplay({
                     item.role === "user" ? "text-foreground" : "text-primary"
                   }`}
                 >
-                  {item.role === "user" ? "You" : "Gemini"}
+                  {item.role === "user" ? "You" : "sixtyoneeighty"}
                 </p>
                 <div className="space-y-2">
                   {item.parts.map((part: HistoryPart, partIndex) => (

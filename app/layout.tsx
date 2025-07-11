@@ -12,7 +12,7 @@ const openSans = Open_Sans({
 
 export const metadata: Metadata = {
   title: "Image Editor",
-  description: "Edit images using Google DeepMind Gemini 2.0",
+  description: "Edit images using sixtyoneeighty ai",
 };
 
 export const viewport: Viewport = {
