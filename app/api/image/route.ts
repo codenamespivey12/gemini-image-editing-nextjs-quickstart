@@ -3,6 +3,14 @@ import { GoogleGenAI } from "@google/genai";
 import OpenAI from "openai";
 import { HistoryItem, HistoryPart } from "@/lib/types";
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb', // Set to a larger limit like 10MB
+    },
+  },
+};
+
 // Initialize the Google Gen AI client with your API key
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
