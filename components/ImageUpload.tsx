@@ -77,7 +77,7 @@ export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploa
 
   const handleRemove = () => {
     setSelectedFile(null);
-    onImageSelect("");
+    onImageSelect(""); // This will clear the image
   };
 
   return (

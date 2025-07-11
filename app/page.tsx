@@ -20,18 +20,37 @@ export default function Home() {
   const [selectedModel, setSelectedModel] = useState<ModelType>("fast");
 
   const handleImageSelect = (imageData: string) => {
+    console.log("handleImageSelect called with:", {
+      hasData: !!imageData,
+      dataLength: imageData?.length || 0,
+      dataPrefix: imageData?.substring(0, 50) || "none"
+    });
+
+    // If empty string, clear everything
+    if (!imageData || imageData.trim() === "") {
+      console.log("Clearing image data");
+      setImage(null);
+      setGeneratedImage(null);
+      setDescription(null);
+      setHistory([]);
+      return;
+    }
+
     // Set the image data
-    setImage(imageData || null);
+    setImage(imageData);
 
     // If we have valid image data, create a placeholder generated image
     // This will trigger the UI to show the edit screen
-    if (imageData) {
-      // Set a temporary description to indicate the image was uploaded
-      setDescription("Your uploaded image is ready to edit. Enter a prompt to describe the changes you want to make.");
+    console.log("Setting up edit mode for uploaded image");
 
-      // Set the uploaded image as the "generated" image to display in the edit view
-      setGeneratedImage(imageData);
-    }
+    // Set a temporary description to indicate the image was uploaded
+    setDescription("Your uploaded image is ready to edit. Enter a prompt to describe the changes you want to make.");
+
+    // Set the uploaded image as the "generated" image to display in the edit view
+    setGeneratedImage(imageData);
+
+    // Clear any existing history since this is a fresh upload
+    setHistory([]);
   };
 
   const handlePromptSubmit = async (prompt: string) => {
@@ -41,6 +60,15 @@ export default function Home() {
 
       // If we have a generated image, use that for editing, otherwise use the uploaded image
       const imageToEdit = generatedImage || image;
+
+      console.log("Debug - Image editing:", {
+        hasGeneratedImage: !!generatedImage,
+        hasUploadedImage: !!image,
+        imageToEditLength: imageToEdit?.length || 0,
+        imageToEditPrefix: imageToEdit?.substring(0, 50) || "none",
+        historyLength: history.length,
+        selectedModel
+      });
 
       // Prepare the request data as JSON
       const requestData = {
@@ -114,7 +142,7 @@ export default function Home() {
   const currentImage = generatedImage || image;
   const isEditing = !!currentImage;
 
-  // Get the latest image to display (always the generated image)
+  // Get the latest image to display (either generated or uploaded)
   const displayImage = generatedImage;
 
   return (
