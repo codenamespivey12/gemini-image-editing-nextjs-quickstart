@@ -47,14 +47,52 @@ export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploa
       setSelectedFile(file);
       setIsLoading(true);
 
-      // Convert the file to base64
+      // Convert the file to base64 with compression
+      const img = new Image();
+      img.onload = () => {
+        // Create canvas for compression
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Calculate new dimensions (max 1024px on longest side)
+        const maxSize = 1024;
+        let { width, height } = img;
+
+        if (width > height) {
+          if (width > maxSize) {
+            height = (height * maxSize) / width;
+            width = maxSize;
+          }
+        } else {
+          if (height > maxSize) {
+            width = (width * maxSize) / height;
+            height = maxSize;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        // Draw and compress
+        ctx?.drawImage(img, 0, 0, width, height);
+
+        // Convert to base64 with compression
+        const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+        onImageSelect(compressedDataUrl);
+        setIsLoading(false);
+      };
+
+      img.onerror = () => {
+        onError?.("Error processing image. Please try again.");
+        setIsLoading(false);
+      };
+
+      // Read file as data URL to load into image
       const reader = new FileReader();
       reader.onload = (event) => {
         if (event.target && event.target.result) {
-          const result = event.target.result as string;
-          onImageSelect(result);
+          img.src = event.target.result as string;
         }
-        setIsLoading(false);
       };
       reader.onerror = () => {
         onError?.("Error reading file. Please try again.");
@@ -111,10 +149,10 @@ export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploa
                 {isDragActive ? "Drop your image here" : "Upload an image to edit"}
               </p>
               <p className="text-sm text-slate-500 dark:text-slate-400">
-                Upload an existing image to modify with AI • Max 10MB
+                Upload an existing image to modify with AI • Auto-compressed for optimal processing
               </p>
               <p className="text-xs text-slate-400 dark:text-slate-500">
-                Supports PNG, JPG, JPEG • Or skip to generate from text below
+                Supports PNG, JPG, JPEG • Images resized to 1024px max • Or skip to generate from text below
               </p>
             </div>
           </div>
