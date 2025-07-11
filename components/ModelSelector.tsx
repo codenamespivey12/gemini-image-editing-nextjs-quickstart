@@ -33,7 +33,7 @@ export function ModelSelector({ selectedModel, onModelChange }: ModelSelectorPro
                 <div className="flex-1">
                   <div className="font-medium">Fast</div>
                   <div className="text-xs text-muted-foreground">
-                    Gemini 2.0 Flash - Quick generation
+                    Our fast model for instant generations and edits - Quick generation
                   </div>
                 </div>
               </Label>
@@ -48,7 +48,7 @@ export function ModelSelector({ selectedModel, onModelChange }: ModelSelectorPro
                 <div className="flex-1">
                   <div className="font-medium">HQ</div>
                   <div className="text-xs text-muted-foreground">
-                    OpenAI GPT-Image-1 - High quality
+                    Uses a stronger model - slower but higher quality
                   </div>
                 </div>
               </Label>

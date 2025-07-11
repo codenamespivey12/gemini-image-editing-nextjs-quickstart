@@ -11,7 +11,7 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Image Editor",
+  title: "sixtyoneeighty image",
   description: "Edit images using sixtyoneeighty ai",
 };
 

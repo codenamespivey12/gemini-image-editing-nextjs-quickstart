@@ -99,7 +99,7 @@ export async function POST(req: NextRequest) {
 
       if (model === "hq") {
         // OpenAI GPT-Image-1 implementation
-        console.log("Using OpenAI GPT-Image-1 model");
+        console.log("Uses our stronger model which is slower but provides better results");
 
         // Prepare input for OpenAI Responses API
         const inputContent = [];
@@ -144,7 +144,7 @@ export async function POST(req: NextRequest) {
         }
       } else {
         // Gemini implementation (existing logic)
-        console.log("Using Gemini 2.0 Flash model");
+        console.log("Uses our faster model for instant generation and edits");
 
         // Convert history to the format expected by Gemini API
         const formattedHistory =
