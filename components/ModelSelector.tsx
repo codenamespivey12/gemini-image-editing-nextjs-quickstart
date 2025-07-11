@@ -48,7 +48,7 @@ export function ModelSelector({ selectedModel, onModelChange }: ModelSelectorPro
               <div className="flex-1">
                 <div className="font-semibold text-slate-800 dark:text-slate-200">Fast</div>
                 <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                  Quick generation • Instant results
+                  Quick generation & editing • Instant results
                 </div>
               </div>
               {selectedModel === "fast" && (
@@ -81,7 +81,7 @@ export function ModelSelector({ selectedModel, onModelChange }: ModelSelectorPro
               <div className="flex-1">
                 <div className="font-semibold text-slate-800 dark:text-slate-200">High Quality</div>
                 <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                  Premium model • Superior results
+                  Premium model • Superior generation & editing
                 </div>
               </div>
               {selectedModel === "hq" && (

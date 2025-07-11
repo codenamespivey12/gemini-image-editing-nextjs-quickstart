@@ -20,7 +20,18 @@ export default function Home() {
   const [selectedModel, setSelectedModel] = useState<ModelType>("fast");
 
   const handleImageSelect = (imageData: string) => {
+    // Set the image data
     setImage(imageData || null);
+
+    // If we have valid image data, create a placeholder generated image
+    // This will trigger the UI to show the edit screen
+    if (imageData) {
+      // Set a temporary description to indicate the image was uploaded
+      setDescription("Your uploaded image is ready to edit. Enter a prompt to describe the changes you want to make.");
+
+      // Set the uploaded image as the "generated" image to display in the edit view
+      setGeneratedImage(imageData);
+    }
   };
 
   const handlePromptSubmit = async (prompt: string) => {
@@ -252,7 +263,7 @@ export default function Home() {
                     <div className="flex items-center space-x-3">
                       <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
                       <span className="text-sm font-medium text-blue-700 dark:text-blue-300">
-                        Editing Mode • Continue editing or start fresh
+                        Editing Mode • Choose your AI model and describe changes
                       </span>
                     </div>
                     <Button
@@ -273,6 +284,21 @@ export default function Home() {
                   onReset={handleReset}
                   conversationHistory={history}
                 />
+
+                {/* Model selector for editing */}
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-gradient-to-r from-yellow-500 to-purple-500 rounded-full"></div>
+                    <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200">
+                      Choose AI Model for Editing
+                    </h3>
+                  </div>
+                  <ModelSelector
+                    selectedModel={selectedModel}
+                    onModelChange={setSelectedModel}
+                  />
+                </div>
+
                 <ImagePromptInput
                   onSubmit={handlePromptSubmit}
                   isEditing={true}
