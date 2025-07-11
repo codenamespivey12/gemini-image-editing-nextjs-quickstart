@@ -35,11 +35,13 @@ export function ImagePromptInput({
             <p className="text-sm font-semibold text-slate-700 dark:text-slate-200">
               {isEditing
                 ? "Describe how you want to edit the image"
-                : "Describe the image you want to generate"}
+                : "Describe the image you want to create"}
             </p>
           </div>
           <p className="text-xs text-slate-500 dark:text-slate-400 ml-4">
-            Be specific and detailed for best results
+            {isEditing
+              ? "Tell the AI what changes to make to your uploaded image"
+              : "Use natural language to generate a completely new image"}
           </p>
         </div>
 
@@ -49,8 +51,8 @@ export function ImagePromptInput({
             className="min-h-[60px] px-4 py-3 text-base border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
             placeholder={
               isEditing
-                ? "Example: Make the background blue and add a rainbow..."
-                : "Example: A 3D rendered image of a pig with wings and a top hat flying over a futuristic city..."
+                ? "Example: Change the background to blue, add a rainbow, remove the person..."
+                : "Example: A majestic dragon flying over a medieval castle at sunset..."
             }
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
@@ -67,7 +69,7 @@ export function ImagePromptInput({
         >
           <div className="flex items-center justify-center space-x-2">
             <Wand2 className={`w-5 h-5 transition-transform duration-200 ${isLoading ? 'animate-spin' : 'group-hover:rotate-12'}`} />
-            <span>{isEditing ? "Edit Image" : "Generate Image"}</span>
+            <span>{isEditing ? "Apply AI Edits" : "Generate New Image"}</span>
           </div>
         </Button>
       </form>

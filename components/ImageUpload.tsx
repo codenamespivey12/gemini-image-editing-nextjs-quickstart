@@ -108,13 +108,13 @@ export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploa
             </div>
             <div className="space-y-2">
               <p className="text-base font-semibold text-slate-700 dark:text-slate-200">
-                {isDragActive ? "Drop your image here" : "Upload an image"}
+                {isDragActive ? "Drop your image here" : "Upload an image to edit"}
               </p>
               <p className="text-sm text-slate-500 dark:text-slate-400">
-                Drag & drop or click to browse • Max 10MB
+                Upload an existing image to modify with AI • Max 10MB
               </p>
               <p className="text-xs text-slate-400 dark:text-slate-500">
-                Supports PNG, JPG, JPEG
+                Supports PNG, JPG, JPEG • Or skip to generate from text below
               </p>
             </div>
           </div>
