@@ -85,37 +85,52 @@ export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploa
       {!currentImage ? (
         <div
           {...getRootProps()}
-          className={`min-h-[150px] p-4 rounded-lg
-          ${isDragActive ? "bg-secondary/50" : "bg-secondary"}
-          ${isLoading ? "opacity-50 cursor-wait" : ""}
-          transition-colors duration-200 ease-in-out hover:bg-secondary/50
-          border-2 border-dashed border-secondary
-          cursor-pointer flex items-center justify-center gap-4
+          className={`min-h-[180px] p-8 rounded-2xl relative overflow-hidden group
+          ${isDragActive
+            ? "bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-300 dark:border-blue-600"
+            : "bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 border-slate-200 dark:border-slate-600"
+          }
+          ${isLoading ? "opacity-50 cursor-wait" : "cursor-pointer hover:from-slate-100 hover:to-slate-200 dark:hover:from-slate-700 dark:hover:to-slate-600"}
+          transition-all duration-300 ease-in-out
+          border-2 border-dashed
+          flex items-center justify-center
         `}
         >
           <input {...getInputProps()} />
-          <div className="flex flex-row items-center" role="presentation">
-            <UploadIcon className="w-8 h-8 text-primary mr-3 flex-shrink-0" aria-hidden="true" />
-            <div className="">
-              <p className="text-sm font-medium text-foreground">
-                Drop your image here or click to browse
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="flex flex-col items-center space-y-4 text-center relative z-10" role="presentation">
+            <div className={`p-4 rounded-full transition-all duration-300 ${
+              isDragActive
+                ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 scale-110"
+                : "bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300 group-hover:scale-105"
+            }`}>
+              <UploadIcon className="w-8 h-8" aria-hidden="true" />
+            </div>
+            <div className="space-y-2">
+              <p className="text-base font-semibold text-slate-700 dark:text-slate-200">
+                {isDragActive ? "Drop your image here" : "Upload an image"}
               </p>
-              <p className="text-xs text-muted-foreground">
-                Maximum file size: 10MB
+              <p className="text-sm text-slate-500 dark:text-slate-400">
+                Drag & drop or click to browse • Max 10MB
+              </p>
+              <p className="text-xs text-slate-400 dark:text-slate-500">
+                Supports PNG, JPG, JPEG
               </p>
             </div>
           </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center p-4 rounded-lg bg-secondary">
-          <div className="flex w-full items-center mb-4">
-            <ImageIcon className="w-8 h-8 text-primary mr-3 flex-shrink-0" aria-hidden="true" />
+        <div className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-6 border border-slate-200 dark:border-slate-600 shadow-lg">
+          <div className="flex w-full items-center mb-6 p-4 bg-white/50 dark:bg-slate-700/50 rounded-xl">
+            <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg mr-4">
+              <ImageIcon className="w-6 h-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+            </div>
             <div className="flex-grow min-w-0">
-              <p className="text-sm font-medium truncate text-foreground">
+              <p className="text-sm font-semibold truncate text-slate-700 dark:text-slate-200">
                 {selectedFile?.name || "Current Image"}
               </p>
               {selectedFile && (
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   {formatFileSize(selectedFile?.size ?? 0)}
                 </p>
               )}
@@ -124,19 +139,19 @@ export function ImageUpload({ onImageSelect, currentImage, onError }: ImageUploa
               variant="ghost"
               size="icon"
               onClick={handleRemove}
-              className="flex-shrink-0 ml-2"
+              className="flex-shrink-0 ml-2 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors"
             >
               <X className="w-4 h-4" />
               <span className="sr-only">Remove image</span>
             </Button>
           </div>
-          <div className="w-full overflow-hidden rounded-md">
+          <div className="w-full overflow-hidden rounded-xl shadow-inner bg-white dark:bg-slate-800 p-2">
             <Image
               src={currentImage}
               alt="Selected"
               width={640}
               height={480}
-              className="w-full h-auto object-contain"
+              className="w-full h-auto object-contain rounded-lg"
               unoptimized
             />
           </div>
