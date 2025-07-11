@@ -127,7 +127,7 @@ export default function Home() {
               </div>
               <div className="space-y-3">
                 <CardTitle className="text-3xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 dark:from-white dark:via-blue-100 dark:to-white bg-clip-text text-transparent">
-                  AI Image Studio
+                  sixtyoneeighty image studio
                 </CardTitle>
                 <p className="text-slate-600 dark:text-slate-300 font-medium text-lg">
                   {displayImage ? "Continue editing your image" : "Upload an image to edit, or generate a new one"}
